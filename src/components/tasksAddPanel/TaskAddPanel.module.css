@@ -1,0 +1,7 @@
+.addPanel__container {
+    padding: 2em;
+    border: 1px solid #000;
+    border-radius: 10px;
+    background-color: #3d5a80;
+    width: 75vw;
+}

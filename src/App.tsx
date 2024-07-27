@@ -1,11 +1,16 @@
-import { Button } from 'antd'
+import { FC } from 'react';
 import './App.css'
+import AppInfo from './components/appInfo/AppInfo';
+import TaskList from './components/tasksList/TaskList';
+import TasksAddPanel from './components/tasksAddPanel/TasksAddPanel';
 
-function App() {
+const App: FC = () => {
 
   return (
     <>
-      <Button type="primary">Button</Button>
+    <AppInfo/>
+    <TaskList/>
+    <TasksAddPanel/>
     </>
   )
 }
