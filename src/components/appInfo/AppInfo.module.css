@@ -1,7 +1,11 @@
 .info__container {
-    padding: 2em;
+    padding:  .5em 2em;
     border: 1px solid #000;
     border-radius: 10px;
     background-color: #3d5a80;
-    width: 75vw;
+    width: 75vw;   
+}
+.info__container h1,
+.info__container h3 {
+    margin: .2em !important;
 }

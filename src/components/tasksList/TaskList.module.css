@@ -1,7 +1,9 @@
 .list__container {
-    padding: 2em;
+    flex: 1 1 auto;
+    padding:  .5em 2em;
     border: 1px solid #000;
     border-radius: 10px;
     background-color: #b7bfca;
     width: 75vw;
+    margin: 1em 0;
 }
