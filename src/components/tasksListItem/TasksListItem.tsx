@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { List as L, Button, Flex, Tooltip, Space, Checkbox} from 'antd';
+import { List as L, Button, Tooltip, Space, Checkbox} from 'antd';
 import type { CheckboxProps } from 'antd';
+import { EditOutlined , DeleteOutlined } from '@ant-design/icons';
+import classes from "./TaskListItem.module.css";
 
 const TasksListItem: FC = () => {
 
@@ -9,28 +11,20 @@ const TasksListItem: FC = () => {
       };
 
     return (
-        <> 
-            <Space>
-                <Checkbox onChange={onChange}>Checkbox</Checkbox>
-                <L.Item.Meta              
-                title={<a href="https://ant.design">{'Task number one'}</a>}
-                description="Ant Design, a design language for background applications, is refined by Ant UED Team"                
-                />  
-                <Flex gap="small">
-                    <Flex wrap gap="small">
-                        <Tooltip title="search">
-                        <Button type="primary" shape="circle">
-                            D
-                        </Button>   
-                        </Tooltip>
-                        <Button type="primary" shape="circle">
-                            C
-                        </Button>                   
-                    </Flex>
-                </Flex>
-            </Space>                                 
-
-        </>
+        <div className={classes.item} >        
+            <Space size={'middle'} >
+                <Checkbox onChange={onChange} >Done</Checkbox>
+                <L.Item.Meta             
+                description="1. Ant Design, a design language for background applications, is refined by Ant UED Team"             
+                /> 
+                <Tooltip title="delete">
+                    <Button type="primary" shape="circle" icon={<DeleteOutlined/>}/> 
+                </Tooltip>
+                <Tooltip title="edit">
+                    <Button type="primary" shape="circle" icon={<EditOutlined/>}/>   
+                </Tooltip>
+            </Space>                            
+        </div>
     );
 };
 
