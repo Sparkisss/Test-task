@@ -5,7 +5,7 @@ import classes from "./TaskListItem.module.css";
 import { TaskListProps } from '../../types/types';
 
 const TasksListItem: FC<TaskListProps> = ({id, description, completed, changeData, onDelete, editTask}) => {
-
+    //редактируем задачу через промпт (если будет время сделать модалку!!!)
     const handleEditTask = (id: number) => {
         const newTitle = prompt('Enter new title:', description);
         if (newTitle && editTask) {

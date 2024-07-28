@@ -4,6 +4,7 @@ import { TaskListProps } from '../../types/types';
 import classes from './TaskList.module.css';
 
 const TaskList: FC<TaskListProps> = ({ data, changeData, onDelete, editTask }) => {
+    //перебираем все задачи и отображаем их
     const tasks = data?.map(item => {
         return (
             <TasksListItem key={item.id}

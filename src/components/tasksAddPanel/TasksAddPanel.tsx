@@ -6,13 +6,13 @@ import classes from './TaskAddPanel.module.css';
 
 const { Title } = Typography;
 
-const TasksAddPanel: FC<TaskListProps> = ({ data, addTask }) => {
+const TasksAddPanel: FC<TaskListProps> = ({ data, addTask}) => {
     const [task, setTask] = useState<string>('');
-    const [maxId, setMaxId] = useState<number>(0);
+    const [maxId, setMaxId] = useState<number>(0); //получаем максимальный id для добавления нового id следующему элементу
 
     useEffect(() => {
-        if (data) {
-            setMaxId(data.reduce((prev, current) => Math.max(prev, current.id), 1));
+        if (data && setMaxId) {
+            setMaxId(data.reduce((prev, current) => Math.max(prev, current.id), 1)); //получаем maxid
         }
     }, [data]);
 
@@ -22,9 +22,8 @@ const TasksAddPanel: FC<TaskListProps> = ({ data, addTask }) => {
             message.error('Task name must be at least 3 characters long and cannot be empty or just spaces.');
             return;
         }
-
         // Добавляем задачу
-        if (addTask) {
+        if (addTask && maxId) {
             addTask({ id: maxId + 1, title: task, completed: false });
             setTask(''); // Очищаем инпут после добавления            
         }

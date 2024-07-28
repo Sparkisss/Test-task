@@ -56,7 +56,6 @@ const editTask = (id: number, newTitle: string): void => {
   });
 };
 
-
 const addTask = (newTask: Data): void => {
   setData(prevData => [...prevData, newTask]);
 }
@@ -74,7 +73,7 @@ const changeData = (id: number) => {
 
   return (
     <>
-    <AppInfo/>
+    <AppInfo data={data}/>
     <TaskList data={data} changeData={changeData} onDelete={deleteTask} editTask={editTask}/>
     <TasksAddPanel data={data} addTask={addTask}/>
     </>
