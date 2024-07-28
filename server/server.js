@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const Post = require('./models/post');
+const Task = require('./models/task');
 
 const app = express();
 const PORT = 5000;
@@ -19,7 +19,7 @@ app.use(express.json());
 // Эндпоинт для получения задач
 app.get('/tasks', async (req, res) => {
     try {
-        const tasks = await Post.find(); // Получаем все задачи из коллекции
+        const tasks = await Task.find(); // Получаем все задачи из коллекции
         res.json(tasks);
     } catch (error) {
         console.error(error);
@@ -30,7 +30,7 @@ app.get('/tasks', async (req, res) => {
 // Эндпоинт для добавления новой задачи
 app.post('/tasks', (req, res) => {
     const { id, title, completed } = req.body;
-    const post = new Post({ id, title, completed });
+    const post = new Task({ id, title, completed });
     post
         .save()
         .then((result) => res.send(result))
@@ -46,7 +46,7 @@ app.delete('/tasks/:id', async (req, res) => {
 
     try {
         // Удаляем задачу по полю id
-        const deletedTask = await Post.findOneAndDelete({ id: parseInt(id) }); // Преобразуем id в число
+        const deletedTask = await Task.findOneAndDelete({ id: parseInt(id) }); // Преобразуем id в число
 
         if (!deletedTask) {
             return res.status(404).send('Task not found'); // Если задача не найдена

@@ -30,3 +30,4 @@ Tasks:
 5. Add method:
  - get;
  - post;
+ - delete;
