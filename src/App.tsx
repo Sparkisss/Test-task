@@ -26,9 +26,24 @@ const App: FC = () => {
     fetchData();
   }, []);
 
-  const deleteTask = (id: number): void => {
-    setData(prevData => prevData.filter(task => task.id !== id));
+  const deleteTask = async (id: number): Promise<void> => {
+    try {
+      // Удаление задачи на сервере
+      const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+        method: 'DELETE',
+      });
+  
+      if (!response.ok) {
+        throw new Error('Ошибка при удалении задачи');
+      }
+  
+      // Удаление задачи из локального состояния
+      setData(prevData => prevData.filter(task => task.id !== id));
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
   };
+  
 
   const editTask = (id: number, newTitle: string): void => {
     setData(prevData => 
