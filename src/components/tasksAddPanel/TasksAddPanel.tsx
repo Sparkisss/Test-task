@@ -1,26 +1,57 @@
-import { FC, useState } from 'react';
-import { Typography, Form, Input, Button, Space } from 'antd';
+import { FC, useEffect, useState } from 'react';
+import { Typography, Form, Input, Button, message, Space } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
-import classes from './TaskAddPanel.module.css'
+import { TaskListProps } from '../../types/types';
+import classes from './TaskAddPanel.module.css';
 
 const { Title } = Typography;
 
-const TasksAddPanel: FC = () => {
-    const [task, setTask] = useState<string>('');  
+const TasksAddPanel: FC<TaskListProps> = ({ data, addTask }) => {
+    const [task, setTask] = useState<string>('');
+    const [maxId, setMaxId] = useState<number>(0);
 
-    return (    
+    useEffect(() => {
+        if (data) {
+            setMaxId(data.reduce((prev, current) => Math.max(prev, current.id), 1));
+        }
+    }, [data]);
+
+    const handleAddTask = () => {
+        // Валидация: проверяем длину строки и наличие пробелов
+        if (task.trim().length < 3) {
+            message.error('Task name must be at least 3 characters long and cannot be empty or just spaces.');
+            return;
+        }
+
+        // Добавляем задачу
+        if (addTask) {
+            addTask({ id: maxId + 1, title: task, completed: false });
+            setTask(''); // Очищаем инпут после добавления            
+        }
+    };
+
+    return (
         <div className={classes.addPanel__container}>
-                <Title level={2}>Add new task.</Title>
-                <Form>
-                    <Space>
-                        <FormItem label="Task name" name="task">
-                            <Input placeholder='Task name' required value={task} onChange={(e) => setTask(e.target.value)}></Input>
-                        </FormItem>
-                        <FormItem>
-                            <Button type='primary' htmlType='submit' onClick={() => console.log(task)}>ADD</Button>
-                        </FormItem>
-                    </Space>
-                </Form>
+            <Title level={2}>Add new task.</Title>
+            <Form>
+                <Space>
+                    <FormItem label="Task name" name="task">
+                        <Input
+                            placeholder='Task name'
+                            required
+                            onChange={(e) => {
+                                setTask(e.target.value);                              
+                            }}
+                            value={task}                            
+                        />
+                    </FormItem>
+                    <FormItem>
+                        <Button type='primary' onClick={handleAddTask}>
+                            ADD
+                        </Button>
+                    </FormItem>
+                </Space>
+            </Form>
         </div>
     );
 };

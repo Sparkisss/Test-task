@@ -15,7 +15,7 @@ const TasksListItem: FC<TaskListProps> = ({id, description, completed, changeDat
     return (
         <div className={classes.item} >        
             <Space size={'middle'} >
-                <Checkbox onChange={() => changeData(id)} >Done</Checkbox>                
+                <Checkbox onChange={() => {if(changeData) changeData(id)}} >Done</Checkbox>                
                 <L.Item.Meta description=<span style={{textDecoration: completed ? 'line-through' : 'none',}}> {description}</span>/>         
                 <Tooltip title="delete">
                     <Button type="primary" shape="circle" icon={<DeleteOutlined/>} 

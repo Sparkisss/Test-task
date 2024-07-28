@@ -33,7 +33,6 @@ const App: FC = () => {
 const deleteTask = (id: number): void => {
   setData(prevData => {
     const index = prevData.findIndex(elem => elem.id === id);
-    console.log(index);
     if (index === -1) {
       // Если элемент не найден, просто возвращаем предыдущее состояние
       return prevData;
@@ -42,6 +41,10 @@ const deleteTask = (id: number): void => {
     return prevData.filter((_, i) => i !== index);
   });
 };
+
+const addTask = (newTask: Data): void => {
+  setData(prevData => [...prevData, newTask]);
+}
 
 
 const changeData = (id: number) => {
@@ -59,7 +62,7 @@ const changeData = (id: number) => {
     <>
     <AppInfo/>
     <TaskList data={data} changeData={changeData} onDelete={deleteTask}/>
-    <TasksAddPanel/>
+    <TasksAddPanel data={data} addTask={addTask}/>
     </>
   )
 }

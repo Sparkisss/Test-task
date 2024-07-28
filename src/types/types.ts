@@ -9,6 +9,7 @@ export interface TaskListProps {
     description?: string;
     id?: number;
     completed?: boolean;   
-    changeData(id: number): void;
+    changeData?(id: number): void;
     onDelete?(id:number): void;
+    addTask?(newTask:Data): void;
 }
