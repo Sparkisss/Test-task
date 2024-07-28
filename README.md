@@ -15,5 +15,12 @@ Tasks:
 
 27.07.24
 1. Create app and implemented eslint
-2. Add And-Design in npm dependences
+2. Add Ant-Design in npm dependences
 3. Created the application structure (add all basic components and basic styles)
+
+28.07.24
+1. Add new functional:
+  - create function;
+  - edit function;
+  - delete function;
+  - togle function.
