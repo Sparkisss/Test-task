@@ -24,3 +24,4 @@ Tasks:
   - edit function;
   - delete function;
   - togle function.
+2. Add comments and render number of tasks and completed tasks
