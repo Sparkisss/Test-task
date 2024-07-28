@@ -25,3 +25,8 @@ Tasks:
   - delete function;
   - togle function.
 2. Add comments and render number of tasks and completed tasks
+3. Create Nodejs server
+4. Connected the server to the db(mongoDb)
+5. Add method:
+ - get;
+ - post;
