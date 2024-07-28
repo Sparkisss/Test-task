@@ -10,4 +10,5 @@ export interface TaskListProps {
     id?: number;
     completed?: boolean;   
     changeData(id: number): void;
+    onDelete?(id:number): void;
 }

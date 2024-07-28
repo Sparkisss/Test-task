@@ -30,6 +30,20 @@ const App: FC = () => {
   ]
 )
 
+const deleteTask = (id: number): void => {
+  setData(prevData => {
+    const index = prevData.findIndex(elem => elem.id === id);
+    console.log(index);
+    if (index === -1) {
+      // Если элемент не найден, просто возвращаем предыдущее состояние
+      return prevData;
+    }
+    // Создаем новый массив без элемента с указанным id
+    return prevData.filter((_, i) => i !== index);
+  });
+};
+
+
 const changeData = (id: number) => {
   setData((prevData) => {
     return prevData.map((item) => {
@@ -44,7 +58,7 @@ const changeData = (id: number) => {
   return (
     <>
     <AppInfo/>
-    <TaskList data={data} changeData={changeData}/>
+    <TaskList data={data} changeData={changeData} onDelete={deleteTask}/>
     <TasksAddPanel/>
     </>
   )

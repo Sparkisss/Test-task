@@ -4,7 +4,7 @@ import { EditOutlined , DeleteOutlined } from '@ant-design/icons';
 import classes from "./TaskListItem.module.css";
 import { TaskListProps } from '../../types/types';
 
-const TasksListItem: FC<TaskListProps> = ({id, description, completed, changeData}) => {
+const TasksListItem: FC<TaskListProps> = ({id, description, completed, changeData, onDelete}) => {
 
     if (id === undefined) {
         // Обработка случая, когда id не определено
@@ -18,7 +18,14 @@ const TasksListItem: FC<TaskListProps> = ({id, description, completed, changeDat
                 <Checkbox onChange={() => changeData(id)} >Done</Checkbox>                
                 <L.Item.Meta description=<span style={{textDecoration: completed ? 'line-through' : 'none',}}> {description}</span>/>         
                 <Tooltip title="delete">
-                    <Button type="primary" shape="circle" icon={<DeleteOutlined/>}/> 
+                    <Button type="primary" shape="circle" icon={<DeleteOutlined/>} 
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            if (onDelete){
+                                onDelete(id)
+                            }
+                        }}
+                    /> 
                 </Tooltip>
                 <Tooltip title="edit">
                     <Button type="primary" shape="circle" icon={<EditOutlined/>}/>   

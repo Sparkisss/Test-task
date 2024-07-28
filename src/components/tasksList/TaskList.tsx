@@ -3,10 +3,16 @@ import TasksListItem from '../tasksListItem/TasksListItem';
 import { TaskListProps } from '../../types/types';
 import classes from './TaskList.module.css';
 
-const TaskList: FC<TaskListProps> = ({ data, changeData }) => {
+const TaskList: FC<TaskListProps> = ({ data, changeData, onDelete }) => {
     const tasks = data?.map(item => {
         return (
-            <TasksListItem key={item.id} id={item.id} description={item.title} completed={item.completed} changeData={changeData}/> 
+            <TasksListItem key={item.id}
+                id={item.id}
+                description={item.title} 
+                completed={item.completed} 
+                changeData={changeData}
+                onDelete={onDelete}
+                />
         );
     });
 
