@@ -1,83 +1,62 @@
-import { FC, useState } from 'react';
-import './App.css'
+import { FC, useEffect, useState } from 'react';
+import './App.css';
 import AppInfo from './components/appInfo/AppInfo';
 import TaskList from './components/tasksList/TaskList';
 import TasksAddPanel from './components/tasksAddPanel/TasksAddPanel';
 import { Data } from './types/types';
 
 const App: FC = () => {
-  const [data, setData] = useState<Data[]>([
-    {
-      id: 1,
-      title: 'Ant Design Title 1',
-      completed: false,
-    },
-    {
-      id: 2,
-      title: 'Ant Design Title 2',
-      completed: false,
-    },
-    {
-      id: 3,
-      title: 'Ant Design Title 3',
-      completed: false,
-    },
-    {
-      id: 4,
-      title: 'Ant Design Title 4',
-      completed: false,
-    },
-  ]
-)
+  const [data, setData] = useState<Data[]>([]);
 
-const deleteTask = (id: number): void => {
-  setData(prevData => {
-    const index = prevData.findIndex(elem => elem.id === id);
-    if (index === -1) {
-      // Если элемент не найден, просто возвращаем предыдущее состояние
-      return prevData;
-    }
-    // Создаем новый массив без элемента с указанным id
-    return prevData.filter((_, i) => i !== index);
-  });
-};
-
-const editTask = (id: number, newTitle: string): void => {
-  setData(prevData => {
-    const index = prevData.findIndex(elem => elem.id === id);
-    if (index === -1) {
-      // Если элемент не найден, просто возвращаем предыдущее состояние
-      return prevData;
-    }
-    // Создаем новый массив с обновленным элементом
-    return prevData.map((task, i) => 
-      i === index ? { ...task, title: newTitle } : task
-    );
-  });
-};
-
-const addTask = (newTask: Data): void => {
-  setData(prevData => [...prevData, newTask]);
-}
-
-const changeData = (id: number) => {
-  setData((prevData) => {
-    return prevData.map((item) => {
-      if(item.id === id) {
-        return {...item, completed: !item.completed}
+  // Загрузка данных из API при первом рендере
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/tasks');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const tasks = await response.json();
+        setData(tasks);
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
       }
-      return item;
-    })
-  })
-}
+    };
+
+    fetchData();
+  }, []);
+
+  const deleteTask = (id: number): void => {
+    setData(prevData => prevData.filter(task => task.id !== id));
+  };
+
+  const editTask = (id: number, newTitle: string): void => {
+    setData(prevData => 
+      prevData.map(task => 
+        task.id === id ? { ...task, title: newTitle } : task
+      )
+    );
+  };
+
+  const addTask = (newTask: Data): void => {
+    setData(prevData => [...prevData, newTask]);
+  };
+
+  const changeData = (id: number) => {
+    setData(prevData => 
+      prevData.map(item => 
+        item.id === id ? { ...item, completed: !item.completed } : item
+      )
+    );
+  };
 
   return (
     <>
-    <AppInfo data={data}/>
-    <TaskList data={data} changeData={changeData} onDelete={deleteTask} editTask={editTask}/>
-    <TasksAddPanel data={data} addTask={addTask}/>
+      <AppInfo data={data} />
+      <TaskList data={data} changeData={changeData} onDelete={deleteTask} editTask={editTask} />
+      <TasksAddPanel data={data} addTask={addTask} />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

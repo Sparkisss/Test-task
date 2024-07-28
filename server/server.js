@@ -16,18 +16,22 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
-// Массив для хранения задач
-let tasks = [];
-
 // Эндпоинт для получения задач
-app.get('/tasks', (req, res) => {
-    res.json(tasks);
+app.get('/tasks', async (req, res) => {
+    try {
+        const tasks = await Post.find(); // Получаем все задачи из коллекции
+        res.json(tasks);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
 });
+
 
 // Эндпоинт для добавления новой задачи
 app.post('/tasks', (req, res) => {
-    const { title, completed } = req.body;
-    const post = new Post({ title, completed });
+    const { id, title, completed } = req.body;
+    const post = new Post({ id, title, completed });
     post
         .save()
         .then((result) => res.send(result))
