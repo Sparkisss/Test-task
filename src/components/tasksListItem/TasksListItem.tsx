@@ -4,7 +4,14 @@ import { EditOutlined , DeleteOutlined } from '@ant-design/icons';
 import classes from "./TaskListItem.module.css";
 import { TaskListProps } from '../../types/types';
 
-const TasksListItem: FC<TaskListProps> = ({id, description, completed, changeData, onDelete}) => {
+const TasksListItem: FC<TaskListProps> = ({id, description, completed, changeData, onDelete, editTask}) => {
+
+    const handleEditTask = (id: number) => {
+        const newTitle = prompt('Enter new title:', description);
+        if (newTitle && editTask) {
+          editTask(id, newTitle);
+        }
+      };
 
     if (id === undefined) {
         // Обработка случая, когда id не определено
@@ -28,7 +35,9 @@ const TasksListItem: FC<TaskListProps> = ({id, description, completed, changeDat
                     /> 
                 </Tooltip>
                 <Tooltip title="edit">
-                    <Button type="primary" shape="circle" icon={<EditOutlined/>}/>   
+                    <Button type="primary" shape="circle" icon={<EditOutlined/>}
+                        onClick={() => handleEditTask(id)}
+                    />   
                 </Tooltip>                
             </Space>                            
         </div>

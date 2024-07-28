@@ -12,4 +12,5 @@ export interface TaskListProps {
     changeData?(id: number): void;
     onDelete?(id:number): void;
     addTask?(newTask:Data): void;
+    editTask?(id:number, newTitle:string): void;
 }

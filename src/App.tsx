@@ -42,10 +42,24 @@ const deleteTask = (id: number): void => {
   });
 };
 
+const editTask = (id: number, newTitle: string): void => {
+  setData(prevData => {
+    const index = prevData.findIndex(elem => elem.id === id);
+    if (index === -1) {
+      // Если элемент не найден, просто возвращаем предыдущее состояние
+      return prevData;
+    }
+    // Создаем новый массив с обновленным элементом
+    return prevData.map((task, i) => 
+      i === index ? { ...task, title: newTitle } : task
+    );
+  });
+};
+
+
 const addTask = (newTask: Data): void => {
   setData(prevData => [...prevData, newTask]);
 }
-
 
 const changeData = (id: number) => {
   setData((prevData) => {
@@ -61,7 +75,7 @@ const changeData = (id: number) => {
   return (
     <>
     <AppInfo/>
-    <TaskList data={data} changeData={changeData} onDelete={deleteTask}/>
+    <TaskList data={data} changeData={changeData} onDelete={deleteTask} editTask={editTask}/>
     <TasksAddPanel data={data} addTask={addTask}/>
     </>
   )
