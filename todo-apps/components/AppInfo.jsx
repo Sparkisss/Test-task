@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
     fontSize: '1.2em',     
   },
   color: {
-    color: 'green',     
+    color: 'greenyellow',     
   },
 });

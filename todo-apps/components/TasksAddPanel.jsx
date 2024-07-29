@@ -61,7 +61,7 @@ export default function TasksAddPanel({data, addTask}) {
           value={task}
           />
         <Pressable style={styles.btn} onPress={handleAddTask}>
-          <Text style={{color: 'white'}}>Add</Text>
+          <Text>Add</Text>
         </Pressable>
       </View>
   );
@@ -74,17 +74,18 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 1,
-    padding: '0.6em',
     marginVertical: '1em',
-    marginHorizontal: '1em', 
     textAlign: 'center',   
     width: '80%',
-    height: 10,
+    fontSize: '0.7em',
   },
   btn: {
     borderWidth: 3,
-    padding: '0.6em',
-    textAlign: 'center',
+    padding: '0.3em',
     borderRadius: 10,
+    backgroundColor: 'white',
+    width: '5em',
+    alignItems: 'center',
+    fontSize: '0.7em',
   },
 });

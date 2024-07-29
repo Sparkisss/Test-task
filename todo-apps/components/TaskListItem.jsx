@@ -19,19 +19,19 @@ export default function TasksListItem({id, description, completed, changeData, o
       return (
         <View style={styles.listItem} >   
         <Pressable onPress={() => { if (changeData) changeData(id) }}>    
-            <Text style={{ textDecorationLine: completed ? 'line-through' : 'none' }}>{description}</Text>
+            <Text style={[{ textDecorationLine: completed ? 'line-through' : 'none' },styles.text]}>{description}</Text>
         </Pressable>
         <View style={styles.listBtn}>
-          <Pressable type="primary" shape="circle" onPress={() => handleEditTask(id)}>
+          <Pressable style={styles.btn} type="primary" shape="circle" onPress={() => handleEditTask(id)}>
             <Text>Edit</Text>
           </Pressable>
-          <Pressable type="primary" shape="circle" onPress={(e) => {
+          <Pressable style={styles.btn} type="primary" shape="circle" onPress={(e) => {
               e.stopPropagation();
               if (onDelete) {
                 onDelete(id);
               }
             }}>
-              <Text>Edit</Text>
+              <Text>Delet</Text>
           </Pressable> 
         </View>        
          
@@ -55,7 +55,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
-    gap: '0.5em',
+    gap: '1.8em',
     justifyContent: 'center',    
   },
+  btn: {
+   backgroundColor: 'white',
+   padding: '0.3em', 
+   borderRadius: '0.3em',
+   marginTop: '1em', 
+   width: '3em',
+   alignItems: 'center',  
+  },
+  text: {
+    fontSize: '1.2em',    
+   },
 });

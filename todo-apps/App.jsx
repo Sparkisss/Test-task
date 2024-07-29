@@ -141,9 +141,10 @@ const styles = StyleSheet.create({
   list: {
     flex: 4,
     backgroundColor: '#b7bfca',
+    overflow: 'scroll',
   },
   addPanel: {
-    flex: 1,
+    flex: 0.7,
     backgroundColor: '#3d5a80',
   }
 });
