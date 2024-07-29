@@ -19,7 +19,7 @@ const AppInfo: FC<TaskListProps> = ({data}) => {
         <div className={classes.info__container}>
             <Title type='success'>TODO APPLICATION</Title>
             <Title level={3}>Total number of tasks: {tasksNumber}</Title>
-            <Title level={3}>Сompleted tasks: {completedTasks}</Title>
+            <Title level={3}>Total number of tasks: {completedTasks}</Title>
         </div>
     );
 };
