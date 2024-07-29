@@ -7,5 +7,6 @@
 }
 .info__container h1,
 .info__container h3 {
+    font-size: 1.4em;
     margin: .2em !important;
 }

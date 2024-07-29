@@ -5,3 +5,6 @@
     background-color: #3d5a80;
     width: 75vw;
 }
+.addPanel__container h2 {
+    font-size: 1.4em;
+}

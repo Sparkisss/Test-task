@@ -21,3 +21,9 @@ body {
   display: flex;
   min-width: 320px;
 }
+
+@media (max-width: 768px) {
+  body {
+    font-size: 10px;
+  }
+}
