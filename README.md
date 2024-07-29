@@ -35,3 +35,7 @@ Tasks:
  29.07.24
  1. Add method:
   - put;
+ 2. Create mobile app:
+  - add all methodes;
+  - add simple styles;
+ 3. Code refactoring
