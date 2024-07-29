@@ -31,3 +31,7 @@ Tasks:
  - get;
  - post;
  - delete;
+
+ 29.07.24
+ 1. Add method:
+  - put;
