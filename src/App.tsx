@@ -7,7 +7,6 @@ import { Data } from './types/types';
 
 const App: FC = () => {
   const [data, setData] = useState<Data[]>([]);
-
   // Загрузка данных из API при первом рендере
   useEffect(() => {
     const fetchData = async () => {
@@ -77,11 +76,9 @@ const App: FC = () => {
     try {
       // Находим текущую задачу
       const taskToUpdate = data.find(item => item.id === id);
-      if (!taskToUpdate) return;
-  
+      if (!taskToUpdate) return;  
       // Изменяем статус задачи
-      const updatedCompletedStatus = !taskToUpdate.completed;
-  
+      const updatedCompletedStatus = !taskToUpdate.completed;  
       // Отправляем обновление на сервер
       const response = await fetch(`http://localhost:5000/tasks/${id}`, {
         method: 'PUT',
@@ -95,8 +92,7 @@ const App: FC = () => {
         throw new Error('Ошибка при обновлении статуса задачи');
       }
   
-      const updatedTask = await response.json();
-  
+      const updatedTask = await response.json();  
       // Обновляем состояние в клиенте
       setData(prevData =>
         prevData.map(item => (item.id === id ? updatedTask : item))

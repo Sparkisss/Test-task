@@ -22,7 +22,6 @@ const TasksAddPanel: FC<TaskListProps> = ({ data, addTask }) => {
             message.error('Task name must be at least 3 characters long and cannot be empty or just spaces.');
             return;
         }
-
         // Создаем новую задачу
         const newTask = { id: maxId + 1, title: task, completed: false };
 
@@ -39,12 +38,10 @@ const TasksAddPanel: FC<TaskListProps> = ({ data, addTask }) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
             // Вызываем функцию addTask для обновления состояния в родительском компоненте
             if (addTask) {
                 addTask(newTask);
             }
-
             // Очищаем инпут после добавления            
             setTask('');
             message.success('Task added successfully!');

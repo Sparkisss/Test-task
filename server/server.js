@@ -63,7 +63,6 @@ app.put('/tasks/:id', async (req, res) => {
     }
 });
 
-
 // Эндпоинт для удаления задачи
 app.delete('/tasks/:id', async (req, res) => {
     const { id } = req.params; // Получаем ID из параметров запроса
