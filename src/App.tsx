@@ -28,41 +28,82 @@ const App: FC = () => {
 
   const deleteTask = async (id: number): Promise<void> => {
     try {
-      // Удаление задачи на сервере
       const response = await fetch(`http://localhost:5000/tasks/${id}`, {
         method: 'DELETE',
       });
-  
+
       if (!response.ok) {
         throw new Error('Ошибка при удалении задачи');
       }
-  
-      // Удаление задачи из локального состояния
+
       setData(prevData => prevData.filter(task => task.id !== id));
     } catch (error) {
       console.error('Ошибка:', error);
     }
   };
-  
+
+  const updateTask = async (id: number, newTitle: string, completed: boolean): Promise<void> => {
+    try {
+      const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: newTitle, completed }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при обновлении задачи');
+      }
+
+      const updatedTask = await response.json();
+      setData(prevData =>
+        prevData.map(task => (task.id === id ? updatedTask : task))
+      );
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  };
 
   const editTask = (id: number, newTitle: string): void => {
-    setData(prevData => 
-      prevData.map(task => 
-        task.id === id ? { ...task, title: newTitle } : task
-      )
-    );
+    updateTask(id, newTitle, false); // Предположим, что при редактировании задача не завершена
   };
 
   const addTask = (newTask: Data): void => {
     setData(prevData => [...prevData, newTask]);
   };
 
-  const changeData = (id: number) => {
-    setData(prevData => 
-      prevData.map(item => 
-        item.id === id ? { ...item, completed: !item.completed } : item
-      )
-    );
+  const changeData = async (id: number) => {
+    try {
+      // Находим текущую задачу
+      const taskToUpdate = data.find(item => item.id === id);
+      if (!taskToUpdate) return;
+  
+      // Изменяем статус задачи
+      const updatedCompletedStatus = !taskToUpdate.completed;
+  
+      // Отправляем обновление на сервер
+      const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: taskToUpdate.title, completed: updatedCompletedStatus }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Ошибка при обновлении статуса задачи');
+      }
+  
+      const updatedTask = await response.json();
+  
+      // Обновляем состояние в клиенте
+      setData(prevData =>
+        prevData.map(item => (item.id === id ? updatedTask : item))
+      );
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
   };
 
   return (
@@ -75,3 +116,4 @@ const App: FC = () => {
 };
 
 export default App;
+

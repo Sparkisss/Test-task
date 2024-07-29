@@ -40,6 +40,30 @@ app.post('/tasks', (req, res) => {
         });
 });
 
+// Эндпоинт для изменения задачи
+app.put('/tasks/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, completed } = req.body; // Предполагаем, что вы хотите обновить title и completed
+
+    try {
+        const updatedTask = await Task.findOneAndUpdate(
+            { id: parseInt(id) }, // Поиск по полю id
+            { title, completed }, // Обновляемые поля
+            { new: true } // Возвращаем обновленный документ
+        );
+
+        if (!updatedTask) {
+            return res.status(404).send('Task not found');
+        }
+
+        res.json(updatedTask); // Возвращаем обновленный документ
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
+
 // Эндпоинт для удаления задачи
 app.delete('/tasks/:id', async (req, res) => {
     const { id } = req.params; // Получаем ID из параметров запроса
