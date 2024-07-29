@@ -66,7 +66,7 @@ export default function App() {
   };
 
   const editTask = (id, newTitle) => {
-    updateTask(id, newTitle, false); // Предположим, что при редактировании задача не завершенаd
+    updateTask(id, newTitle, false); // Предположим, что при редактировании задача не завершена
   };
 
   const addTask = (newTask) => {
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#fff',
   },
-  commen: {    
+  commen: {
     borderWidth: 3,
     borderRadius: 10,
   },
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3d5a80',
   },
   list: {
-    flex: 3,
+    flex: 4,
     backgroundColor: '#b7bfca',
   },
   addPanel: {

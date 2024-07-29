@@ -11,16 +11,26 @@ export default function AppInfo({data}) {
   }, 0); 
     
   return (
-      <View >
-        <Text>TODO APPLICATION</Text>
-        <Text>Total number of tasks: {tasksNumber}</Text>
-        <Text>Total number of tasks: {completedTasks}</Text>
+      <View style={styles.info}>
+        <Text style={[styles.text, styles.color]}>TODO APPLICATION</Text>
+        <Text style={styles.text}>Total number of tasks: {tasksNumber}</Text>
+        <Text style={styles.text}>Total number of tasks: {completedTasks}</Text>
       </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-
+  info: {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center', 
+    justifyContent: 'center',     
+  },
+  text: {
+    fontWeight: 'bold',
+    fontSize: '1.2em',     
+  },
+  color: {
+    color: 'green',     
   },
 });

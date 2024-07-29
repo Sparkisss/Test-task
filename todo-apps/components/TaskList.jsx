@@ -18,14 +18,14 @@ export default function TaskList({data, changeData, onDelete, editTask}) {
     });
     
   return (
-      <View >
+      <View>
         {tasks}
       </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-
+  list: {
+    
   },
 });
